@@ -1,0 +1,10 @@
+program pippo;
+  var a,b;
+begin
+  a:=1;
+  b:=7;
+  a:=a*b+3;
+  b:=b-1*a;
+  write(a);
+  write(b);
+end.

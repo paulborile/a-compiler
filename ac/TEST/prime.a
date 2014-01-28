@@ -1,0 +1,32 @@
+program	primes;
+var	i,j;
+var	flag;
+var	dot;
+
+begin
+	i := 5;
+	while ( i < 1000) do begin
+		j := 2;
+		while ( j <= (i - 1)) do begin
+			if ( i <> ((i/j) * j)) then
+			 begin
+				j := j + 1;
+				flag := 0;
+			 end;
+			else
+			 begin
+/* i non e' primo
+				j := i;
+				flag := 1;
+			 end;
+		end;
+		if (flag = 1 ) then
+			flag := 0;
+		else
+			begin
+				flag := 0;
+				write(i);
+			end;
+		i := i + 1;
+	end;
+end.

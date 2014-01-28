@@ -1,0 +1,11 @@
+module	first;
+
+export	m_pop;
+
+procedure m_pop(ivar);
+
+begin
+	null;
+end;
+
+null.

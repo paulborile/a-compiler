@@ -1,0 +1,31 @@
+program	fatt1;
+array	flag[3000];
+var	cnt,i;
+begin
+	i:=0;
+	while (i<3000) do
+	begin
+		flag[i]:=1;
+		i:=i+1;
+	end;
+
+/* main loop
+
+
+	i:=2;
+	while (i<3000) do
+	begin
+		if (flag[i]=1) then
+		begin
+			write(i);
+			cnt:=i;
+			while (cnt<3000) do
+			begin
+				flag[cnt]:=0;
+				cnt:=cnt+i;
+			end;
+		end;
+		else	null;
+		i:=i+1;
+	end;
+end.

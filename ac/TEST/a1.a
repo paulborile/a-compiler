@@ -1,0 +1,11 @@
+program	small;
+
+import	m_pop,m_push;
+
+var	top,bottom;
+
+begin
+	top := 1;
+	call	m_push(top);
+	call	m_pop(top);
+end.

@@ -1,0 +1,11 @@
+module	second;
+
+export	m_push;
+
+procedure m_push(ivar);
+
+begin
+	null;
+end;
+
+null.

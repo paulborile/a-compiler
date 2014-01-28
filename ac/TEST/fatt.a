@@ -1,0 +1,12 @@
+program	fatt;
+var	num
+procedure fattor(dummy);
+var b;
+begin
+	if dummy=1 then
+		dummy=1;
+	else
+		begin
+			
+		end
+end.
