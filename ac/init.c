@@ -7,20 +7,23 @@
 #include <stdio.h>
 #include "extern.h"
 
-extern	char	tsave[];
-extern	struct	dtab	*dbase;
-extern	struct	etab	*ebase;
-extern	struct	rtab	*rbase;
-extern	int	d_first,e_first,r_first;
-extern	int	e_size,d_size,i_size,r_size,i_cnt;
-extern	int	io_in;
+extern char tsave[];
+extern struct dtab *dbase;
+extern struct etab *ebase;
+extern struct rtab *rbase;
+extern int d_first, e_first, r_first;
+extern int e_size, d_size, i_size, r_size, i_cnt;
+extern int io_in;
 
 ac_init()
 {
 
-	if (!d_first) d_free(dbase);
-	if (!e_first) e_free(ebase);
-	if (!r_first) r_free(rbase);
+	if (!d_first)
+		d_free(dbase);
+	if (!e_first)
+		e_free(ebase);
+	if (!r_first)
+		r_free(rbase);
 	dbase = NULL;
 	rbase = NULL;
 	ebase = NULL;

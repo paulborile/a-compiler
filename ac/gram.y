@@ -36,6 +36,7 @@
 
 %{
 #include	<stdio.h>
+#include	<string.h>
 #include 	"extern.h"
 #include	"structs.h"
 #include	"instcod.h"
@@ -142,7 +143,7 @@ unit 	:	YPROG	prog_head decl block YDOT
 			d_print(dbase);
 			e_print(ebase);
 			printf("Dtab size = %d Etab size = %d\n",d_size,e_size);
-#endif TRACE
+#endif
 		}
 		|
 		error	YSEMICOL

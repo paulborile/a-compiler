@@ -5,16 +5,17 @@
  */
 
 #include <stdio.h>
+#include <string.h>
 #include "extern.h"
 #include "outhd.h"
 
-extern	char	yytext[];
-struct	head	*ptr;
+extern char yytext[];
+struct head *ptr;
 
 upd_magic()
 {
 	magic.mag = 'a';
-	strncpy(magic.label,yytext,MAXVAR);
+	strncpy(magic.label, yytext, MAXVAR);
 }
 
 /*
@@ -23,5 +24,5 @@ upd_magic()
 
 put_hd()
 {
-	write(fd_out, &magic, (sizeof (struct head)));
+	write(fd_out, &magic, (sizeof(struct head)));
 }

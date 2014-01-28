@@ -15,49 +15,50 @@
 
 /* For dtab */
 
-extern	int	d_cnt;
-extern	int	d_first;
-extern	struct	dtab	*dbase;
-extern	struct	dtab	*done;
-extern	struct	dtab	*dtwo;
-struct	dtab	*d_init(),*d_add(),*d_search();
+extern int d_cnt;
+extern int d_first;
+extern struct dtab *dbase;
+extern struct dtab *done;
+extern struct dtab *dtwo;
+struct dtab *d_init(), *d_add(), *d_search();
 
 /* For etab */
 
-extern	int	e_cnt;
-extern	int	e_first;
-extern	struct	etab	*ebase;
-extern	struct	etab	*eone;
-extern	struct	etab	*etwo;
-struct	etab	*e_init(),*e_add(),*e_search();
-extern	struct	etab	*e_read,*e_write,*e_rd_str,*e_wr_str;
+extern int e_cnt;
+extern int e_first;
+extern struct etab *ebase;
+extern struct etab *eone;
+extern struct etab *etwo;
+struct etab *e_init(), *e_add(), *e_search();
+extern struct etab *e_read, *e_write, *e_rd_str, *e_wr_str;
 
 /* For rtab */
 
-extern	int	r_first;
-extern	struct	rtab	*rbase;
-extern	struct	rtab	*rone;
-extern	struct	rtab	*rtwo;
-struct	rtab	*r_init(),*r_add();
+extern int r_first;
+extern struct rtab *rbase;
+extern struct rtab *rone;
+extern struct rtab *rtwo;
+struct rtab *r_init(), *r_add();
 
 
 /* for itab */
 
-extern	int	i_size;
-extern	int	i_cnt;
+extern int i_size;
+extern int i_cnt;
 
-extern	int	io_in;
-extern	char	yytext[];
-extern	char	tsave[];
-extern	char	pname[];
-extern	char	procname[];
+extern int io_in;
+extern char yytext[];
+extern char tsave[];
+extern char pname[];
+extern char procname[];
 
 /* Also need space for PROGRAM statement */
 
 prog_all()
 {
-	if (e_first) {
-		ebase = e_init("M",pname);
+	if (e_first)
+	{
+		ebase = e_init("M", pname);
 		eone = etwo = ebase;
 	}
 }
@@ -66,10 +67,11 @@ prog_all()
 
 fill_p_add()
 {
-	struct	etab	*dummy;
+	struct etab *dummy;
 
-	if (( dummy = e_search(ebase,pname)) == NULL ) {
-		yygenerr("No program name","","","");
+	if ((dummy = e_search(ebase, pname)) == NULL)
+	{
+		yygenerr("No program name", "", "", "");
 		return;
 	}
 	dummy->e_out.addr = i_cnt;
@@ -82,16 +84,20 @@ fill_p_add()
 
 imp_all()
 {
-	if (e_first)  {
-		ebase = e_init("I",yytext);
+	if (e_first)
+	{
+		ebase = e_init("I", yytext);
 		eone = etwo = ebase;
 	}
-	else  {
-		if ( e_search(ebase,yytext) == NULL ) {
-			etwo = e_add(eone,"I",yytext);
+	else
+	{
+		if (e_search(ebase, yytext) == NULL)
+		{
+			etwo = e_add(eone, "I", yytext);
 			eone = etwo;
 		}
-		else  {
+		else
+		{
 			yyredec(yytext);
 		}
 	}
@@ -104,21 +110,24 @@ imp_all()
 
 exp_all()
 {
-	struct	etab	*dummy;
+	struct etab *dummy;
 
-	if (e_first)  {
-		ebase = e_init("E",yytext);
+	if (e_first)
+	{
+		ebase = e_init("E", yytext);
 		eone = etwo = ebase;
 		return;
 	}
-	dummy = e_search(ebase,yytext);
-	if (dummy == NULL) {
-		etwo = e_add(eone,"E",yytext);
+	dummy = e_search(ebase, yytext);
+	if (dummy == NULL)
+	{
+		etwo = e_add(eone, "E", yytext);
 		etwo->e_out.addr = TOBEDEF;
 		eone = etwo;
 		return;
 	}
-	if (dummy->e_out.type == 'P') {
+	if (dummy->e_out.type == 'P')
+	{
 		dummy->e_out.type = 'E';
 		return;
 	}
@@ -131,33 +140,35 @@ exp_all()
 
 io_all()
 {
-	if (io_in) return;
-	if (e_first)  {
-		ebase = e_init("S","read");
+	if (io_in)
+		return;
+	if (e_first)
+	{
+		ebase = e_init("S", "read");
 		e_read = ebase;
 		eone = etwo = ebase;
-		etwo = e_add(eone,"S","write");
+		etwo = e_add(eone, "S", "write");
 		e_write = etwo;
 		eone = etwo;
-		etwo = e_add(eone,"S","readstr");
+		etwo = e_add(eone, "S", "readstr");
 		e_rd_str = etwo;
 		eone = etwo;
-		etwo = e_add(eone,"S","writestr");
+		etwo = e_add(eone, "S", "writestr");
 		e_wr_str = etwo;
 		eone = etwo;
 		io_in = 1;
 		return;
 	}
-	etwo = e_add(eone,"S","read");
+	etwo = e_add(eone, "S", "read");
 	e_read = etwo;
 	eone = etwo;
-	etwo = e_add(eone,"S","write");
+	etwo = e_add(eone, "S", "write");
 	e_write = etwo;
 	eone = etwo;
-	etwo = e_add(eone,"S","readstr");
+	etwo = e_add(eone, "S", "readstr");
 	e_rd_str = etwo;
 	eone = etwo;
-	etwo = e_add(eone,"S","writestr");
+	etwo = e_add(eone, "S", "writestr");
 	e_wr_str = etwo;
 	eone = etwo;
 	io_in = 1;
@@ -172,16 +183,20 @@ io_all()
 
 var_all()
 {
-	if (d_first) {
-		dbase = d_init(yytext,1);
+	if (d_first)
+	{
+		dbase = d_init(yytext, 1);
 		done = dtwo = dbase;
 	}
-	else  {
-		if ( d_search(dbase,yytext) == NULL ) {
-			dtwo = d_add(done,yytext,1);
+	else
+	{
+		if (d_search(dbase, yytext) == NULL)
+		{
+			dtwo = d_add(done, yytext, 1);
 			done = dtwo;
 		}
-		else {
+		else
+		{
 			yyredec(yytext);
 		}
 	}
@@ -193,16 +208,20 @@ var_all()
 
 array_all()
 {
-	if (d_first) {
-		dbase = d_init(tsave,atoi(yytext));
+	if (d_first)
+	{
+		dbase = d_init(tsave, atoi(yytext));
 		done = dtwo = dbase;
 	}
-	else  {
-		if ( d_search(dbase,tsave) == NULL ) {
-			dtwo = d_add(done,tsave,atoi(yytext));
+	else
+	{
+		if (d_search(dbase, tsave) == NULL)
+		{
+			dtwo = d_add(done, tsave, atoi(yytext));
 			done = dtwo;
 		}
-		else {
+		else
+		{
 			yyredec(yytext);
 		}
 	}
@@ -215,22 +234,25 @@ array_all()
 
 proc_all()
 {
-	struct	etab	*dummy;
+	struct etab *dummy;
 
-	if (e_first)  {
-		ebase = e_init("P",yytext);
+	if (e_first)
+	{
+		ebase = e_init("P", yytext);
 		eone = etwo = ebase;
 		ebase->e_out.addr = i_cnt;
 		return;
 	}
-	dummy = e_search(ebase,yytext);
-	if (dummy == NULL) {
-		etwo = e_add(eone,"P",yytext);
+	dummy = e_search(ebase, yytext);
+	if (dummy == NULL)
+	{
+		etwo = e_add(eone, "P", yytext);
 		eone = etwo;
 		etwo->e_out.addr = i_cnt;
 		return;
 	}
-	if (dummy->e_out.type == 'E') {
+	if (dummy->e_out.type == 'E')
+	{
 		dummy->e_out.addr = i_cnt;
 		return;
 	}
@@ -242,14 +264,16 @@ proc_all()
  */
 
 rel_all(flag)
-char	*flag;
+char *flag;
 {
-	if (r_first) {
-		rbase = r_init(flag,i_cnt-1);
+	if (r_first)
+	{
+		rbase = r_init(flag, i_cnt - 1);
 		rone = rtwo = rbase;
 	}
-	else  {
-		rtwo = r_add(rone,flag,i_cnt-1);
+	else
+	{
+		rtwo = r_add(rone, flag, i_cnt - 1);
 		rone = rtwo;
 	}
 }
@@ -262,14 +286,15 @@ char	*flag;
 
 exp_tst()
 {
-	struct	etab	*e_scan;
+	struct etab *e_scan;
 
-	e_scan=ebase;
-	while (e_scan!=NULL) {
-		if ((e_scan->e_out.type == 'E') && (e_scan->e_out.addr == -1)) {
-			yygenerr("Unresolved export :",
-				 e_scan->e_out.ep_name,"",""); 
+	e_scan = ebase;
+	while (e_scan != NULL)
+	{
+		if ((e_scan->e_out.type == 'E') && (e_scan->e_out.addr == -1))
+		{
+			yygenerr("Unresolved export :", e_scan->e_out.ep_name, "", "");
 		}
-		e_scan=e_scan->next;
+		e_scan = e_scan->next;
 	}
 }

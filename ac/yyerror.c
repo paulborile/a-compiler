@@ -11,21 +11,24 @@
 #include <stdio.h>
 #include "extern.h"
 
-extern	char	yytext[];
+extern char yytext[];
 
 yyError(mess)
-char	*mess;
+char *mess;
 {
 
-	if (lin_cnt == lin_sav) {
-		return; 
+	if (lin_cnt == lin_sav)
+	{
+		return;
 	}
-	if (l_list) {
-		printf("\n\t***  At line %d %s\n",lin_cnt,mess);
+	if (l_list)
+	{
+		printf("\n\t***  At line %d %s\n", lin_cnt, mess);
 		fflush(stdout);
 	}
-	else {
-		fprintf(stderr,"\"%s\" : at line %d %s\n",ifile,lin_cnt,mess);
+	else
+	{
+		fprintf(stderr, "\"%s\" : at line %d %s\n", ifile, lin_cnt, mess);
 		fflush(stderr);
 	}
 	lin_sav = lin_cnt;
@@ -38,46 +41,51 @@ char	*mess;
  */
 
 yyredec(label)
-char	*label;
+char *label;
 {
 
-	if (l_list) {
-		printf("\n\t***  At line %d redeclaration of ' ",lin_cnt);
-		printf("%s",label);
+	if (l_list)
+	{
+		printf("\n\t***  At line %d redeclaration of ' ", lin_cnt);
+		printf("%s", label);
 		printf(" '\n");
 		fflush(stdout);
 	}
-	else {
-	  fprintf(stderr,"\"%s\" : at line %d redeclaration of ' ",ifile,lin_cnt);
-		fprintf(stderr,"%s",label);
-		fprintf(stderr," '\n");
+	else
+	{
+		fprintf(stderr, "\"%s\" : at line %d redeclaration of ' ", ifile,
+				lin_cnt);
+		fprintf(stderr, "%s", label);
+		fprintf(stderr, " '\n");
 		fflush(stderr);
 	}
 	err_cnt++;
 	fatal = 1;
 }
 
-yygenerr(l1,l2,l3,l4)
-char	*l1;
-char	*l2;
-char	*l3;
-char	*l4;
+yygenerr(l1, l2, l3, l4)
+char *l1;
+char *l2;
+char *l3;
+char *l4;
 {
 
-	if (l_list) {
-		printf("\n\t***  At line %d  ",lin_cnt);
-		printf("%s",l1);
-		printf("%s",l2);
-		printf("%s",l3);
-		printf("%s\n",l4);
+	if (l_list)
+	{
+		printf("\n\t***  At line %d  ", lin_cnt);
+		printf("%s", l1);
+		printf("%s", l2);
+		printf("%s", l3);
+		printf("%s\n", l4);
 		fflush(stdout);
 	}
-	else {
-		fprintf(stderr,"\"%s\" : at line %d  ",ifile,lin_cnt);
-		fprintf(stderr,"%s",l1);
-		fprintf(stderr,"%s",l2);
-		fprintf(stderr,"%s",l3);
-		fprintf(stderr,"%s\n",l4);
+	else
+	{
+		fprintf(stderr, "\"%s\" : at line %d  ", ifile, lin_cnt);
+		fprintf(stderr, "%s", l1);
+		fprintf(stderr, "%s", l2);
+		fprintf(stderr, "%s", l3);
+		fprintf(stderr, "%s\n", l4);
 		fflush(stderr);
 	}
 	err_cnt++;
@@ -92,12 +100,14 @@ char	*l4;
 
 ill_char()
 {
-	if (l_list) {
-	   printf("\n\t***  At line %d illegal character %s.\n",lin_cnt,yytext);
+	if (l_list)
+	{
+		printf("\n\t***  At line %d illegal character %s.\n", lin_cnt, yytext);
 	}
-	else {
-	     fprintf(stderr,"\"%s\" : at line %d ",ifile,lin_cnt);
-	     fprintf(stderr,"illegal character %s.\n",yytext);
+	else
+	{
+		fprintf(stderr, "\"%s\" : at line %d ", ifile, lin_cnt);
+		fprintf(stderr, "illegal character %s.\n", yytext);
 	}
 	ill_cnt++;
 	fatal = 1;
@@ -110,5 +120,6 @@ ill_char()
  */
 
 yyerror(mess)
-char	*mess;
-{}
+char *mess;
+{
+}

@@ -5,6 +5,8 @@
  */
 
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "structs.h"
 #include "extern.h"
 
@@ -12,24 +14,24 @@
  * Some variables
  */
 
-int	r_size = 0;
-int	r_first = 1;
-struct	rtab	*rbase;
-struct	rtab	*rone;
-struct	rtab	*rtwo;
+int r_size = 0;
+int r_first = 1;
+struct rtab *rbase;
+struct rtab *rone;
+struct rtab *rtwo;
 
 
 /* Initialize RTAB for relocation addresses */
 
-struct	rtab
-*r_init(flag,addr)
-char	*flag;
-int	addr;
+struct rtab *r_init(flag, addr)
+char *flag;
+int addr;
 {
-	struct	rtab	*base;
+	struct rtab *base;
 
-	if ((base = (struct rtab *) malloc(sizeof (struct rtab))) == 0 ) {
-		fprintf(stderr,"No more memory. Bye.\n");
+	if ((base = (struct rtab *) malloc(sizeof(struct rtab))) == 0)
+	{
+		fprintf(stderr, "No more memory. Bye.\n");
 		exit(0);
 	}
 	r_first = 0;
@@ -37,21 +39,21 @@ int	addr;
 	base->r_out.rel_ref = *flag;
 	base->r_out.i_addr = addr;
 	base->next = NULL;
-	return(base);
+	return (base);
 }
 
 /* Add one element to RTAB */
 
-struct	rtab
-*r_add(lastnode,flag,addr)
-struct	rtab	*lastnode;
-char	*flag;
-int	addr;
+struct rtab *r_add(lastnode, flag, addr)
+struct rtab *lastnode;
+char *flag;
+int addr;
 {
-	struct	rtab	*ret;
+	struct rtab *ret;
 
-	if ((ret = (struct rtab *) malloc(sizeof (struct rtab))) == 0 ) {
-		fprintf(stderr,"No more memory. Bye.\n");
+	if ((ret = (struct rtab *) malloc(sizeof(struct rtab))) == 0)
+	{
+		fprintf(stderr, "No more memory. Bye.\n");
 		exit(0);
 	}
 	lastnode->next = ret;
@@ -59,20 +61,21 @@ int	addr;
 	ret->r_out.i_addr = addr;
 	ret->next = NULL;
 	r_size++;
-	return(ret);
+	return (ret);
 }
 
 
 /* Print RTAB contents for debugging purposes */
 
 r_print(start)
-struct	rtab	*start;
+struct rtab *start;
 {
-	struct	rtab	*dummy;
+	struct rtab *dummy;
 
-	while ( dummy != NULL ) {
+	while (dummy != NULL)
+	{
 		printf("Flag = %c Addr = %d \n",
-		dummy->r_out.rel_ref, dummy->r_out.i_addr);
+			   dummy->r_out.rel_ref, dummy->r_out.i_addr);
 		dummy = dummy->next;
 	}
 }
@@ -83,13 +86,14 @@ struct	rtab	*start;
 */
 
 r_free(start)
-struct	rtab	*start;
+struct rtab *start;
 {
-	struct	rtab	*dummy;
+	struct rtab *dummy;
 
 	dummy = start;
 
-	while ( dummy != NULL ) {
+	while (dummy != NULL)
+	{
 		start = dummy->next;
 		free(dummy);
 		dummy = start;

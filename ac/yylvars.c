@@ -15,16 +15,16 @@
 
 /* For lvtab */
 
-extern	int	lv_cnt;
-extern	int	lv_first;
-extern	struct	lvtab	*lvbase;
-extern	struct	lvtab	*lvone;
-extern	struct	lvtab	*lvtwo;
-struct	lvtab	*lv_init(),*lv_add(),*lv_search();
+extern int lv_cnt;
+extern int lv_first;
+extern struct lvtab *lvbase;
+extern struct lvtab *lvone;
+extern struct lvtab *lvtwo;
+struct lvtab *lv_init(), *lv_add(), *lv_search();
 
-extern	char	yytext[];
-extern	char	tsave[];
-extern	char	pname[];
+extern char yytext[];
+extern char tsave[];
+extern char pname[];
 
 /*
  * Allocate space for local VAR declarations 
@@ -32,16 +32,20 @@ extern	char	pname[];
 
 lvar_all()
 {
-	if (lv_first) {
-		lvbase = lv_init(yytext,1);
+	if (lv_first)
+	{
+		lvbase = lv_init(yytext, 1);
 		lvone = lvtwo = lvbase;
 	}
-	else  {
-		if ( lv_search(lvbase,yytext) == NULL ) {
-			lvtwo = lv_add(lvone,yytext,1);
+	else
+	{
+		if (lv_search(lvbase, yytext) == NULL)
+		{
+			lvtwo = lv_add(lvone, yytext, 1);
 			lvone = lvtwo;
 		}
-		else {
+		else
+		{
 			yyredec(yytext);
 		}
 	}
@@ -53,16 +57,20 @@ lvar_all()
 
 larr_all()
 {
-	if (lv_first) {
-		lvbase = lv_init(tsave,atoi(yytext));
+	if (lv_first)
+	{
+		lvbase = lv_init(tsave, atoi(yytext));
 		lvone = lvtwo = lvbase;
 	}
-	else  {
-		if ( lv_search(lvbase,tsave) == NULL ) {
-			lvtwo = lv_add(lvone,tsave,atoi(yytext));
+	else
+	{
+		if (lv_search(lvbase, tsave) == NULL)
+		{
+			lvtwo = lv_add(lvone, tsave, atoi(yytext));
 			lvone = lvtwo;
 		}
-		else {
+		else
+		{
 			yyredec(yytext);
 		}
 	}

@@ -7,25 +7,31 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <signal.h>
 
-extern	char	crossfile[],asfile[],ofile[];
-extern	int	l_list,s_flag;
+extern char crossfile[], asfile[], ofile[];
+extern int l_list, s_flag;
 
 rubout()
 {
-	signal(SIGINT,rubout);
-	if (l_list) {
-		if ( access(crossfile,0) == 0 ) {
+	signal(SIGINT, rubout);
+	if (l_list)
+	{
+		if (access(crossfile, 0) == 0)
+		{
 			unlink(crossfile);
 		}
 	}
-	if (s_flag) {
-		if (access(asfile,0) == 0 ) {
+	if (s_flag)
+	{
+		if (access(asfile, 0) == 0)
+		{
 			unlink(asfile);
 		}
 	}
-	if (access(ofile,0) == 0 ) {
+	if (access(ofile, 0) == 0)
+	{
 		unlink(ofile);
 	}
 	exit(1);

@@ -13,7 +13,7 @@
  */
 
 c_put(str)
-char	*str;
+char *str;
 {
 	fprintf(fp_c, "%s", str);
 }
@@ -23,7 +23,7 @@ char	*str;
  */
 
 c_put_tab(number)
-int	number;
+int number;
 {
 	while (number--)
 		fprintf(fp_c, "\t");
