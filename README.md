@@ -42,7 +42,7 @@ The project is made of :
 
 * ac - the compiler, based on bison and flex
 * al - the linker
-* as - the stack machine assembler
+* aa - the stack machine assembler
 * ax - the stack machine executer
 
 Also the stack machine opcodes are lost :-) but you can see io.s library code for writestr function here :
