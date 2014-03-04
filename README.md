@@ -85,9 +85,5 @@ Also the stack machine opcodes are lost :-) but you can see io.s library code fo
 ...
 
 or you can generate stack machine code with ac -S ...
-
-
-
-
-
+Code was written by me and a friend of mine (Franz) too many years ago but the original friendship too is lost.
 
