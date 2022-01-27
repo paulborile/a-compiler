@@ -34,62 +34,62 @@ extern int i_size;
 
 d_dump()
 {
-	struct dtab *dummy;
+    struct dtab *dummy;
 
-	t_size.tab_size = d_size;
-	write(fd_out, &t_size, sizeof(struct size));
+    t_size.tab_size = d_size;
+    write(fd_out, &t_size, sizeof(struct size));
 
-	dummy = dbase;
+    dummy = dbase;
 
-	while (dummy != NULL)
-	{
-		write(fd_out, &dummy->d_out, sizeof(struct dout));
-		dummy = dummy->next;
-	}
+    while (dummy != NULL)
+    {
+        write(fd_out, &dummy->d_out, sizeof(struct dout));
+        dummy = dummy->next;
+    }
 }
 
 e_dump()
 {
-	struct etab *dummy;
+    struct etab *dummy;
 
-	t_size.tab_size = e_size;
-	write(fd_out, &t_size, sizeof(struct size));
+    t_size.tab_size = e_size;
+    write(fd_out, &t_size, sizeof(struct size));
 
-	dummy = ebase;
+    dummy = ebase;
 
-	while (dummy != NULL)
-	{
-		write(fd_out, &dummy->e_out, sizeof(struct eout));
-		dummy = dummy->next;
-	}
+    while (dummy != NULL)
+    {
+        write(fd_out, &dummy->e_out, sizeof(struct eout));
+        dummy = dummy->next;
+    }
 }
 
 r_dump()
 {
-	struct rtab *dummy;
+    struct rtab *dummy;
 
-	t_size.tab_size = r_size;
-	write(fd_out, &t_size, sizeof(struct size));
+    t_size.tab_size = r_size;
+    write(fd_out, &t_size, sizeof(struct size));
 
-	dummy = rbase;
-	while (dummy != NULL)
-	{
-		write(fd_out, &dummy->r_out, sizeof(struct rout));
-		dummy = dummy->next;
-	}
+    dummy = rbase;
+    while (dummy != NULL)
+    {
+        write(fd_out, &dummy->r_out, sizeof(struct rout));
+        dummy = dummy->next;
+    }
 }
 
 i_dump()
 {
-	int cnt;
+    int cnt;
 
-	t_size.tab_size = i_size;
-	write(fd_out, &t_size, sizeof(struct size));
+    t_size.tab_size = i_size;
+    write(fd_out, &t_size, sizeof(struct size));
 
-	if ((cnt =
-		 write(fd_out, itab, (i_size * sizeof(cnt)))) != (i_size * sizeof(cnt)))
-	{
-		fprintf(stderr, "Error in writing itab\n");
-		exit(1);
-	}
+    if ((cnt =
+             write(fd_out, itab, (i_size * sizeof(cnt)))) != (i_size * sizeof(cnt)))
+    {
+        fprintf(stderr, "Error in writing itab\n");
+        exit(1);
+    }
 }

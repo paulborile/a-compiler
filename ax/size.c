@@ -1,6 +1,6 @@
 main()
 {
-	unsigned a;
+    unsigned a;
 
-	printf("%d\n", sizeof(a));
+    printf("%d\n", sizeof(a));
 }

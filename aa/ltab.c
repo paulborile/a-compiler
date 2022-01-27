@@ -28,19 +28,19 @@ struct ltab *l_init(label, addr)
 char *label;
 int addr;
 {
-	struct ltab *base;
+    struct ltab *base;
 
-	if ((base = (struct ltab *) malloc(sizeof(struct ltab))) == 0)
-	{
-		fprintf(stderr, "No more memory for ltab. Bye.\n");
-		exit(0);
-	}
-	l_cnt = l_first = 0;
-	l_size = 1;
-	base->addr = addr;
-	strncpy(base->lab_name, label, MAXVAR);
-	base->next = NULL;
-	return (base);
+    if ((base = (struct ltab *) malloc(sizeof(struct ltab))) == 0)
+    {
+        fprintf(stderr, "No more memory for ltab. Bye.\n");
+        exit(0);
+    }
+    l_cnt = l_first = 0;
+    l_size = 1;
+    base->addr = addr;
+    strncpy(base->lab_name, label, MAXVAR);
+    base->next = NULL;
+    return (base);
 }
 
 
@@ -51,19 +51,19 @@ struct ltab *lastnode;
 char *label;
 int addr;
 {
-	struct ltab *ret;
+    struct ltab *ret;
 
-	if ((ret = (struct ltab *) malloc(sizeof(struct ltab))) == 0)
-	{
-		fprintf(stderr, "No more memory for ltab.Bye .\n");
-		exit(0);
-	}
-	lastnode->next = ret;
-	ret->addr = addr;
-	strncpy(ret->lab_name, label, MAXVAR);
-	ret->next = NULL;
-	l_size++;
-	return (ret);
+    if ((ret = (struct ltab *) malloc(sizeof(struct ltab))) == 0)
+    {
+        fprintf(stderr, "No more memory for ltab.Bye .\n");
+        exit(0);
+    }
+    lastnode->next = ret;
+    ret->addr = addr;
+    strncpy(ret->lab_name, label, MAXVAR);
+    ret->next = NULL;
+    l_size++;
+    return (ret);
 }
 
 /* Search for one entry in DTAB given a pointer to start of list and label */
@@ -72,36 +72,36 @@ struct ltab *l_search(start, label)
 struct ltab *start;
 char *label;
 {
-	struct ltab *dummy;
+    struct ltab *dummy;
 
-	dummy = start;
+    dummy = start;
 
-	while (dummy != NULL)
-	{
-		if (strncmp(label, dummy->lab_name, MAXVAR) == 0)
-		{
-			return (dummy);
-		}
-		dummy = dummy->next;
-	}
-	return (NULL);
+    while (dummy != NULL)
+    {
+        if (strncmp(label, dummy->lab_name, MAXVAR) == 0)
+        {
+            return (dummy);
+        }
+        dummy = dummy->next;
+    }
+    return (NULL);
 }
 
-/* 
- * Print contents of DTAB for debugging purposes 
+/*
+ * Print contents of DTAB for debugging purposes
  */
 
 l_print(start)
 struct ltab *start;
 {
-	struct ltab *dummy;
+    struct ltab *dummy;
 
-	dummy = start;
-	while (dummy != NULL)
-	{
-		printf("Addr = %d Label = %s \n", dummy->addr, dummy->lab_name);
-		dummy = dummy->next;
-	}
+    dummy = start;
+    while (dummy != NULL)
+    {
+        printf("Addr = %d Label = %s \n", dummy->addr, dummy->lab_name);
+        dummy = dummy->next;
+    }
 }
 
 /*
@@ -112,15 +112,15 @@ struct ltab *start;
 l_free(start)
 struct ltab *start;
 {
-	struct ltab *dummy;
+    struct ltab *dummy;
 
-	dummy = start;
+    dummy = start;
 
-	while (dummy != NULL)
-	{
-		start = dummy->next;
-		free(dummy);
-		dummy = start;
-	}
-	lbase = NULL;
+    while (dummy != NULL)
+    {
+        start = dummy->next;
+        free(dummy);
+        dummy = start;
+    }
+    lbase = NULL;
 }

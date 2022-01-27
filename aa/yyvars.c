@@ -2,18 +2,18 @@
  *	 y y v a r s . c
  *
  * What to do when I find variable declarations
-*/
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "extern.h"
 #include "structs.h"
-#define	TOBEDEF	-1
+#define TOBEDEF -1
 
-/* 
+/*
  * Extern variables
-*/
+ */
 
 /* For dtab */
 
@@ -72,82 +72,82 @@ extern char pname[];
 
 prog_all()
 {
-	if (e_first)
-	{
-		ebase = e_init("M", pname);
-		eone = etwo = ebase;
-	}
+    if (e_first)
+    {
+        ebase = e_init("M", pname);
+        eone = etwo = ebase;
+    }
 }
 
 /* fill program entry point with actual itab address */
 
 fill_p_add()
 {
-	struct ltab *l_dummy;
-	struct etab *e_dummy;
+    struct ltab *l_dummy;
+    struct etab *e_dummy;
 
-	if (found_start)
-	{
-		if ((l_dummy = l_search(lbase, pname)) == NULL)
-		{
-			yygenerr("Start directive without label ", "", "", "");
-			return;
-		}
-		else
-		{
-			e_dummy = e_search(ebase, pname);
-			e_dummy->e_out.addr = l_dummy->addr;
-		}
-	}
+    if (found_start)
+    {
+        if ((l_dummy = l_search(lbase, pname)) == NULL)
+        {
+            yygenerr("Start directive without label ", "", "", "");
+            return;
+        }
+        else
+        {
+            e_dummy = e_search(ebase, pname);
+            e_dummy->e_out.addr = l_dummy->addr;
+        }
+    }
 }
 
-/* 
+/*
  * Make second pass to find unresolved labels
  */
 
 s_pass()
 {
-	struct ltab *l_dummy;
-	struct ultab *ul_dummy;
+    struct ltab *l_dummy;
+    struct ultab *ul_dummy;
 
-	ul_dummy = ulbase;
+    ul_dummy = ulbase;
 
-	while (ul_dummy != NULL)
-	{
-		if ((l_dummy = l_search(lbase, ul_dummy->lab_name)) == NULL)
-		{
-			yygenerr("Undefined label '", ul_dummy->lab_name, "'", "");
-			return;
-		}
-		itab[(ul_dummy->i_addr)] = l_dummy->addr;
-		ul_dummy = ul_dummy->next;
-	}
+    while (ul_dummy != NULL)
+    {
+        if ((l_dummy = l_search(lbase, ul_dummy->lab_name)) == NULL)
+        {
+            yygenerr("Undefined label '", ul_dummy->lab_name, "'", "");
+            return;
+        }
+        itab[(ul_dummy->i_addr)] = l_dummy->addr;
+        ul_dummy = ul_dummy->next;
+    }
 }
 
 
-/* 
+/*
  * Allocate space for import variables
  */
 
 imp_all()
 {
-	if (e_first)
-	{
-		ebase = e_init("I", yytext);
-		eone = etwo = ebase;
-	}
-	else
-	{
-		if (e_search(ebase, yytext) == NULL)
-		{
-			etwo = e_add(eone, "I", yytext);
-			eone = etwo;
-		}
-		else
-		{
-			yyredec(yytext);
-		}
-	}
+    if (e_first)
+    {
+        ebase = e_init("I", yytext);
+        eone = etwo = ebase;
+    }
+    else
+    {
+        if (e_search(ebase, yytext) == NULL)
+        {
+            etwo = e_add(eone, "I", yytext);
+            eone = etwo;
+        }
+        else
+        {
+            yyredec(yytext);
+        }
+    }
 }
 
 
@@ -157,105 +157,105 @@ imp_all()
 
 exp_all()
 {
-	struct etab *dummy;
+    struct etab *dummy;
 
-	if (e_first)
-	{
-		ebase = e_init("E", yytext);
-		eone = etwo = ebase;
-		return;
-	}
-	dummy = e_search(ebase, yytext);
-	if (dummy == NULL)
-	{
-		etwo = e_add(eone, "E", yytext);
-		etwo->e_out.addr = TOBEDEF;
-		eone = etwo;
-		return;
-	}
-	if (dummy->e_out.type == 'P')
-	{
-		dummy->e_out.type = 'E';
-		return;
-	}
-	yyredec(yytext);
+    if (e_first)
+    {
+        ebase = e_init("E", yytext);
+        eone = etwo = ebase;
+        return;
+    }
+    dummy = e_search(ebase, yytext);
+    if (dummy == NULL)
+    {
+        etwo = e_add(eone, "E", yytext);
+        etwo->e_out.addr = TOBEDEF;
+        eone = etwo;
+        return;
+    }
+    if (dummy->e_out.type == 'P')
+    {
+        dummy->e_out.type = 'E';
+        return;
+    }
+    yyredec(yytext);
 }
 
-/* 
+/*
  * Allocate space for LABELS
  */
 
 lab_all()
 {
-	struct etab *dummy;
+    struct etab *dummy;
 
-	if (l_first)
-	{
-		lbase = l_init(tsave, i_cnt);
-		lone = ltwo = lbase;
-	}
-	else
-	{
-		if (l_search(lbase, tsave) == NULL)
-		{
-			ltwo = l_add(lone, tsave, i_cnt);
-			lone = ltwo;
-		}
-		else
-		{
-			yyredec(tsave);
-		}
-	}
-	dummy = e_search(ebase, tsave);
-	if (dummy == NULL)
-		return;
-	dummy->e_out.addr = i_cnt;
+    if (l_first)
+    {
+        lbase = l_init(tsave, i_cnt);
+        lone = ltwo = lbase;
+    }
+    else
+    {
+        if (l_search(lbase, tsave) == NULL)
+        {
+            ltwo = l_add(lone, tsave, i_cnt);
+            lone = ltwo;
+        }
+        else
+        {
+            yyredec(tsave);
+        }
+    }
+    dummy = e_search(ebase, tsave);
+    if (dummy == NULL)
+        return;
+    dummy->e_out.addr = i_cnt;
 }
 
 /*
- * Allocate space for undefined labels 
+ * Allocate space for undefined labels
  */
 
 ul_all()
 {
-	if (ul_first)
-	{
-		ulbase = ul_init(yytext, i_cnt);
-		ulone = ultwo = ulbase;
-	}
-	else
-	{
-		ultwo = ul_add(ulone, yytext, i_cnt);
-		ulone = ultwo;
-	}
-	i2_add(-1);
-	rel_all("J");
+    if (ul_first)
+    {
+        ulbase = ul_init(yytext, i_cnt);
+        ulone = ultwo = ulbase;
+    }
+    else
+    {
+        ultwo = ul_add(ulone, yytext, i_cnt);
+        ulone = ultwo;
+    }
+    i2_add(-1);
+    rel_all("J");
 }
 
 
 /*
- * Allocate space for array declarations 
+ * Allocate space for array declarations
  */
 
 word_all()
 {
-	if (d_first)
-	{
-		dbase = d_init(tsave, atoi(yytext));
-		done = dtwo = dbase;
-	}
-	else
-	{
-		if (d_search(dbase, tsave) == NULL)
-		{
-			dtwo = d_add(done, tsave, atoi(yytext));
-			done = dtwo;
-		}
-		else
-		{
-			yyredec(tsave);
-		}
-	}
+    if (d_first)
+    {
+        dbase = d_init(tsave, atoi(yytext));
+        done = dtwo = dbase;
+    }
+    else
+    {
+        if (d_search(dbase, tsave) == NULL)
+        {
+            dtwo = d_add(done, tsave, atoi(yytext));
+            done = dtwo;
+        }
+        else
+        {
+            yyredec(tsave);
+        }
+    }
 }
 
 
@@ -265,26 +265,26 @@ word_all()
 
 proc_all()
 {
-	struct etab *dummy;
+    struct etab *dummy;
 
-	if (e_first)
-	{
-		ebase = e_init("P", yytext);
-		eone = etwo = ebase;
-		return;
-	}
-	dummy = e_search(ebase, yytext);
-	if (dummy == NULL)
-	{
-		etwo = e_add(eone, "P", yytext);
-		eone = etwo;
-		return;
-	}
-	if (dummy->e_out.type == 'E')
-	{
-		return;
-	}
-	yyredec(yytext);
+    if (e_first)
+    {
+        ebase = e_init("P", yytext);
+        eone = etwo = ebase;
+        return;
+    }
+    dummy = e_search(ebase, yytext);
+    if (dummy == NULL)
+    {
+        etwo = e_add(eone, "P", yytext);
+        eone = etwo;
+        return;
+    }
+    if (dummy->e_out.type == 'E')
+    {
+        return;
+    }
+    yyredec(yytext);
 }
 
 /*
@@ -294,16 +294,16 @@ proc_all()
 rel_all(flag)
 char *flag;
 {
-	if (r_first)
-	{
-		rbase = r_init(flag, i_cnt - 1);
-		rone = rtwo = rbase;
-	}
-	else
-	{
-		rtwo = r_add(rone, flag, i_cnt - 1);
-		rone = rtwo;
-	}
+    if (r_first)
+    {
+        rbase = r_init(flag, i_cnt - 1);
+        rone = rtwo = rbase;
+    }
+    else
+    {
+        rtwo = r_add(rone, flag, i_cnt - 1);
+        rone = rtwo;
+    }
 }
 
 
@@ -314,15 +314,15 @@ char *flag;
 
 exp_tst()
 {
-	struct etab *e_scan;
+    struct etab *e_scan;
 
-	e_scan = ebase;
-	while (e_scan != NULL)
-	{
-		if ((e_scan->e_out.type == 'E') && (e_scan->e_out.addr == -1))
-		{
-			yygenerr("Unresolved export :", e_scan->e_out.ep_name, "", "");
-		}
-		e_scan = e_scan->next;
-	}
+    e_scan = ebase;
+    while (e_scan != NULL)
+    {
+        if ((e_scan->e_out.type == 'E') && (e_scan->e_out.addr == -1))
+        {
+            yygenerr("Unresolved export :", e_scan->e_out.ep_name, "", "");
+        }
+        e_scan = e_scan->next;
+    }
 }

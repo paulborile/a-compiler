@@ -24,10 +24,4 @@ clean:
 	rm $(OBJ)
 
 indent:
-	indent -ts4 -kr -bl -bli0 -bls -cli4 -nce -l80 *.c
-
-
-inouts.o jump.o insterr.o main.o loader.o : error.h
-interpreter.o io.o stack.o als.o : error.h
-jump.o stack.o interpreter.o als.o loader.o : vmacdef.h
-inouts.o : vmacdef.h
+	uncrustify -l C --replace --no-backup -c ../crustify-config *.[ch]

@@ -1,19 +1,19 @@
 /* A Bison parser, made by GNU Bison 2.5.  */
 
 /* Bison interface for Yacc-like parsers in C
-   
+
       Copyright (C) 1984, 1989-1990, 2000-2011 Free Software Foundation, Inc.
-   
+
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
@@ -26,7 +26,7 @@
    special exception, which will cause the skeleton and the resulting
    Bison output files to be licensed under the GNU General Public
    License without this special exception.
-   
+
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
@@ -34,48 +34,48 @@
 /* Tokens.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum yytokentype {
-     YPUSHI = 258,
-     YPUSHIR = 259,
-     YPUSH = 260,
-     YPUSHR = 261,
-     YPOP = 262,
-     YPOPR = 263,
-     YPUSHX = 264,
-     YPOPX = 265,
-     YADD = 266,
-     YSUB = 267,
-     YMUL = 268,
-     YDIV = 269,
-     YCMP = 270,
-     YNOP = 271,
-     YJMP = 272,
-     YJEQ = 273,
-     YJNE = 274,
-     YJLT = 275,
-     YJLE = 276,
-     YJGT = 277,
-     YJGE = 278,
-     YCALL = 279,
-     YRET = 280,
-     YINPUT = 281,
-     YOUTPUT = 282,
-     YWORD = 283,
-     YIMPORT = 284,
-     YEXPORT = 285,
-     YSTOP = 286,
-     YMODULE = 287,
-     YEND = 288,
-     YDOT = 289,
-     YSTART = 290,
-     YSPFREE = 291,
-     YSPALLOC = 292,
-     YLABEL = 293,
-     YNUMBER = 294,
-     YLABYCOLON = 295
-   };
+/* Put the tokens into the symbol table, so that GDB and other debuggers
+   know about them.  */
+enum yytokentype {
+    YPUSHI = 258,
+    YPUSHIR = 259,
+    YPUSH = 260,
+    YPUSHR = 261,
+    YPOP = 262,
+    YPOPR = 263,
+    YPUSHX = 264,
+    YPOPX = 265,
+    YADD = 266,
+    YSUB = 267,
+    YMUL = 268,
+    YDIV = 269,
+    YCMP = 270,
+    YNOP = 271,
+    YJMP = 272,
+    YJEQ = 273,
+    YJNE = 274,
+    YJLT = 275,
+    YJLE = 276,
+    YJGT = 277,
+    YJGE = 278,
+    YCALL = 279,
+    YRET = 280,
+    YINPUT = 281,
+    YOUTPUT = 282,
+    YWORD = 283,
+    YIMPORT = 284,
+    YEXPORT = 285,
+    YSTOP = 286,
+    YMODULE = 287,
+    YEND = 288,
+    YDOT = 289,
+    YSTART = 290,
+    YSPFREE = 291,
+    YSPALLOC = 292,
+    YLABEL = 293,
+    YNUMBER = 294,
+    YLABYCOLON = 295
+};
 #endif
 /* Tokens.  */
 #define YPUSHI 258
@@ -120,7 +120,7 @@
 
 
 
-#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+#if !defined YYSTYPE && !defined YYSTYPE_IS_DECLARED
 typedef int YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

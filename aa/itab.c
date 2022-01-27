@@ -1,7 +1,7 @@
 /*
  *	i t a b . c
  *
- * Instruction Table management 
+ * Instruction Table management
  */
 
 #include <stdio.h>
@@ -22,36 +22,36 @@ int i_cnt;
 i1_add(opcode)
 int opcode;
 {
-	if (i_size > MAXITAB)
-	{
-		fprintf(stderr, "No more space for itab \n");
-		exit(1);
-	}
-	itab[i_cnt] = opcode;
-	i_cnt++;
-	i_size++;
+    if (i_size > MAXITAB)
+    {
+        fprintf(stderr, "No more space for itab \n");
+        exit(1);
+    }
+    itab[i_cnt] = opcode;
+    i_cnt++;
+    i_size++;
 }
 
 i2_add(operand)
 int operand;
 {
-	if (i_size > MAXITAB)
-	{
-		fprintf(stderr, "No more space for itab \n");
-		exit(1);
-	}
-	itab[i_cnt] = operand;
-	i_cnt++;
-	i_size++;
+    if (i_size > MAXITAB)
+    {
+        fprintf(stderr, "No more space for itab \n");
+        exit(1);
+    }
+    itab[i_cnt] = operand;
+    i_cnt++;
+    i_size++;
 }
 
 i_print()
 {
-	int i;
+    int i;
 
-	printf("Itab size = %d \n", i_size);
-	for (i = 0; i < i_size; i++)
-	{
-		printf("%d\t%d\n", i, itab[i]);
-	}
+    printf("Itab size = %d \n", i_size);
+    for (i = 0; i < i_size; i++)
+    {
+        printf("%d\t%d\n", i, itab[i]);
+    }
 }

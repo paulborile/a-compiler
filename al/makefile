@@ -11,9 +11,5 @@ al	: 	$(OBJ)
 clean :
 	rm *.o 
 
-indent	:
-	indent -ts4 -kr -bl -bli0 -bls -cli4 -nce -l80 *.c
-
-print.o rbuff.o dmod.o rmod.o emod.o fpass.o spass.o : defstruct.h
-linker.o : vmacdef.h
-io.o : outhd.h
+indent:
+	uncrustify -l C --replace --no-backup -c ../crustify-config *.[ch]
