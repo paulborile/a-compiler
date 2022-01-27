@@ -1,5 +1,5 @@
 /*
- *	c o u t . c 
+ *	c o u t . c
  *
  * "C" printout functions
  */
@@ -15,7 +15,7 @@
 c_put(str)
 char *str;
 {
-	fprintf(fp_c, "%s", str);
+    fprintf(fp_c, "%s", str);
 }
 
 /*
@@ -25,8 +25,8 @@ char *str;
 c_put_tab(number)
 int number;
 {
-	while (number--)
-		fprintf(fp_c, "\t");
+    while (number--)
+        fprintf(fp_c, "\t");
 }
 
 
@@ -36,5 +36,5 @@ int number;
 
 c_put_nl()
 {
-	fprintf(fp_c, "\n");
+    fprintf(fp_c, "\n");
 }

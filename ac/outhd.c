@@ -1,6 +1,6 @@
 /*
  *     o u t h d . c
- * 
+ *
  * Create header for .o file
  */
 
@@ -14,8 +14,8 @@ struct head *ptr;
 
 upd_magic()
 {
-	magic.mag = 'a';
-	strncpy(magic.label, yytext, MAXVAR);
+    magic.mag = 'a';
+    strncpy(magic.label, yytext, MAXVAR);
 }
 
 /*
@@ -24,5 +24,5 @@ upd_magic()
 
 put_hd()
 {
-	write(fd_out, &magic, (sizeof(struct head)));
+    write(fd_out, &magic, (sizeof(struct head)));
 }
