@@ -9,7 +9,7 @@ a-compiler
     var     dot;
 
     begin
-    	i := 5;
+        i := 5;
         while ( i < 1000) do begin
                 j := 2;
                 while ( j <= (i - 1)) do begin
@@ -20,7 +20,7 @@ a-compiler
                          end;
                         else
                          begin
-    /* i is not prime
+                                /* i is not prime
                                 j := i;
                                 flag := 1;
                          end;
